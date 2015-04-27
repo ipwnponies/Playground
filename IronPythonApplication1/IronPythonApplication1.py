@@ -8,18 +8,17 @@ def main():
     list = [i for i in range(10)]
     shuffle(list)
 
-    sort = Sorter.selectionSort
-    sortedList = sort(list)
+    sorter = HeapSort()
+    sortedList = sorter.sort(list)
     print sortedList
 
+class HeapSort(object):
+    def sort(self, list):
 
-class Sorter(object):
-    @staticmethod
-    def heapSort(list):
         return list
 
-    @staticmethod
-    def selectionSort(list):
+class SelectionSort(object):
+    def sort(self, list):
         newList = []
         while len(list) > 0:
             max = -1

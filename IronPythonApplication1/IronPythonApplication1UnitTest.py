@@ -15,20 +15,20 @@ class SortUnitTest(object):
         random.shuffle(self.data)
         self.assertNotEqual(self.data, self.expected, 'Two lists were not shuffled.')
 
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_reverse(self):
         '''List is reversed and sorted.
         '''
         self.data.reverse()
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_presorted(self):
         '''List is unchanged and sorted.
         '''
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_itemRemoved(self):
@@ -62,12 +62,12 @@ class HeapSortUnitTest(SortUnitTest, unittest.TestCase):
         '''Sets up the heap sort tests.
         '''
         SortUnitTest.setUp(self)
-        self.sort = Sorter().heapSort
+        self.sorter = HeapSort()
 
 class SelectionSortUnitTest(SortUnitTest, unittest.TestCase):
     def setUp(self):
         SortUnitTest.setUp(self)
-        self.sort = Sorter().selectionSort
+        self.sorter = SelectionSort()
 
 if __name__ == '__main__':
     unittest.main()
