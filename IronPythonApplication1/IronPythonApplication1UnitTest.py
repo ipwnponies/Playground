@@ -15,20 +15,20 @@ class SortUnitTest(object):
         random.shuffle(self.data)
         self.assertNotEqual(self.data, self.expected, 'Two lists were not shuffled.')
 
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_reverse(self):
         '''List is reversed and sorted.
         '''
         self.data.reverse()
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_presorted(self):
         '''List is unchanged and sorted.
         '''
-        self.data = self.sort(self.data)
+        self.data = self.sorter.sort(self.data)
         self.compare()
 
     def test_itemRemoved(self):
@@ -62,12 +62,42 @@ class HeapSortUnitTest(SortUnitTest, unittest.TestCase):
         '''Sets up the heap sort tests.
         '''
         SortUnitTest.setUp(self)
-        self.sort = Sorter().heapSort
+        self.sorter = HeapSort()
+
+    def test_buildHeap(self):
+        list = range(10)
+        self.sorter.buildHeap(list)
+        self.assertEqual(list, [9,8,6,7,4,5,2,0,3,1], "Heap property was not satisfied on the heap.")
+
+    def test_siftDown_oneItem(self):
+        list = [0]
+        self.sorter.siftDown(list, 0, len(list))
+        self.assertEqual(list, [0], "The sift down algorithm is broken for trivial case.")
+
+    def test_siftDown_twoItem_notSorted(self):
+        list = [0,1]
+        self.sorter.siftDown(list,0, len(list))
+        self.assertEqual(list, [1,0], "The sift down algorithm is not doing comparison between parent and child correctly.")
+
+    def test_siftDown_twoItem_alreadySorted(self):
+        list = [1,0]
+        self.sorter.siftDown(list,0, len(list))
+        self.assertEqual(list, [1,0], "The sift down is sorting an already sorted heap.")
+
+    def test_siftDown_fiveItem_alreadySorted(self):
+        list = [4,2,3,0,1]
+        self.sorter.siftDown(list,0, len(list))
+        self.assertEqual(list, [4,2,3,0,1], "The sift down is sorting an already sorted heap.")
+
+    def test_siftDown_fiveItem_notSorted(self):
+        list = [4, 0, 1, 2, 3]
+        self.sorter.siftDown(list,1, len(list))
+        self.assertEqual(list, [4,3,1,2,0], "The sift down does not work for more than 1 level.")
 
 class SelectionSortUnitTest(SortUnitTest, unittest.TestCase):
     def setUp(self):
         SortUnitTest.setUp(self)
-        self.sort = Sorter().selectionSort
+        self.sorter = SelectionSort()
 
 if __name__ == '__main__':
     unittest.main()
