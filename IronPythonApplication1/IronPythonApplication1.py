@@ -52,12 +52,31 @@ class HeapSort(object):
 
 class MergeSort(object):
     def sort(self, list):
+        return self.topDownSort(list)
+
+    def bottomUpSort(self, list):
+        '''Sort with bottom up approach. Each element is sorted within itself. Then merge with its neighbours.
+        '''
+        width = 1
+        while width < len(list):
+            i = 0
+            while i < len(list):
+                list[i:i+2*width] = self.merge(list[i:i + width], list[i + width: i + 2*width])
+                i += 2 * width 
+            width *= 2
+        return list
+
+    def topDownSort(self, list):
+        '''Sort with top down approach. This is the common approach when thinking of merge sort.
+        '''
         if len(list) <= 1:
             return list
         splitcount = len(list) / 2
         return self.merge(self.sort(list[:splitcount]), self.sort(list[splitcount:]))
 
     def merge(self, lista, listb):
+        '''Merge the two lists, ordering the elements from both list.
+        '''
         sortedList = []
         while len(lista) > 0 and len(listb) > 0:
             if lista[0] < listb[0]:
