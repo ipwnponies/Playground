@@ -99,6 +99,11 @@ class BubbleSortUnitTest(SortUnitTest, unittest.TestCase):
         SortUnitTest.setUp(self)
         self.sorter = BubbleSort()
 
+class InsertionSortUnitTest(SortUnitTest, unittest.TestCase):
+    def setUp(self):
+        SortUnitTest.setUp(self)
+        self.sorter = InsertionSort()
+
 class SelectionSortUnitTest(SortUnitTest, unittest.TestCase):
     def setUp(self):
         SortUnitTest.setUp(self)

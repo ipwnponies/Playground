@@ -58,6 +58,16 @@ class BubbleSort(object):
                     list[j], list[j+1] = list[j+1], list[j]
         return list
 
+class InsertionSort(object):
+    def sort(self, list):
+        for i in xrange(len(list)):
+            maxIndex = i
+            for j in xrange(i, len(list)):
+                if list[j] < list[maxIndex]:
+                    maxIndex = j
+            list[maxIndex], list[i] =  list[i], list[maxIndex]
+        return list
+
 class SelectionSort(object):
     def sort(self, list):
         newList = []
