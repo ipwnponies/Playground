@@ -94,6 +94,11 @@ class HeapSortUnitTest(SortUnitTest, unittest.TestCase):
         self.sorter.siftDown(list,1, len(list))
         self.assertEqual(list, [4,3,1,2,0], "The sift down does not work for more than 1 level.")
 
+class MergeSortUnitTest(SortUnitTest, unittest.TestCase):
+    def setUp(self):
+        SortUnitTest.setUp(self)
+        self.sorter = MergeSort()
+
 class BubbleSortUnitTest(SortUnitTest, unittest.TestCase):
     def setUp(self):
         SortUnitTest.setUp(self)
