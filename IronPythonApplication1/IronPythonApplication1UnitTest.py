@@ -109,5 +109,17 @@ class SelectionSortUnitTest(SortUnitTest, unittest.TestCase):
         SortUnitTest.setUp(self)
         self.sorter = SelectionSort()
 
-if __name__ == '__main__':
+def runAll():
     unittest.main()
+
+def runSingleTest():
+    tests = unittest.TestSuite()
+    tests.addTest(InsertionSort('test_reverse'))
+    unittest.TextTestRunner().run(tests)
+
+def runSingleTestcase():
+    tests = unittest.TestLoader().loadTestsFromTestCase(InsertionSortUnitTest)
+    unittest.TextTestRunner().run(tests)
+
+if __name__ == '__main__':
+    runSingleTestcase()
