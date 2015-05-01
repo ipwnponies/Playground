@@ -50,6 +50,26 @@ class HeapSort(object):
             leftChild = root * 2 + 1
             rightChild = leftChild + 1
 
+class MergeSort(object):
+    def sort(self, list):
+        if len(list) <= 1:
+            return list
+        splitcount = len(list) / 2
+        return self.merge(self.sort(list[:splitcount]), self.sort(list[splitcount:]))
+
+    def merge(self, lista, listb):
+        sortedList = []
+        while len(lista) > 0 and len(listb) > 0:
+            if lista[0] < listb[0]:
+                sortedList.append(lista.pop(0))
+            else:
+                sortedList.append(listb.pop(0))
+
+        # Add remaining items in list. Either lista or listb is empty at this time.
+        sortedList.extend(lista)
+        sortedList.extend(listb)
+        return sortedList
+
 class BubbleSort(object):
     def sort(self, list):
         for i in xrange(len(list) - 1):
