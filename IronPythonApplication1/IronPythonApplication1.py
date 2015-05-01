@@ -50,6 +50,14 @@ class HeapSort(object):
             leftChild = root * 2 + 1
             rightChild = leftChild + 1
 
+class BubbleSort(object):
+    def sort(self, list):
+        for i in xrange(len(list) - 1):
+            for j in xrange(len(list) - 1 - i):
+                if list[j] > list[j + 1]:
+                    list[j], list[j+1] = list[j+1], list[j]
+        return list
+
 class SelectionSort(object):
     def sort(self, list):
         newList = []
