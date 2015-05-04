@@ -1,6 +1,7 @@
 from System import *
 from System.Collections.Generic import List
 import clr
+import sys
 
 from random import shuffle
 
@@ -148,17 +149,22 @@ class InsertionSort(object):
         return list
 
 class SelectionSort(object):
+    '''
+    Selection sort is selection sort. The smallest element is found from list and appended to the sorted list.
+    The next smallest is found and appended, and so on.
+    '''
     def sort(self, list):
-        newList = []
-        while len(list) > 0:
-            max = -1
-            maxIndex = -1
-            for i in xrange(len(list)):
-                if list[i] > max:
-                    maxIndex = i
-                    max = list[maxIndex]
-            newList.insert(0, list.pop(maxIndex))
-        return newList
+        for i in xrange(len(list)):
+            maxIndex = i
+
+            # Find smallest element in remaining range.
+            for j in xrange(i, len(list)):
+                if list[j] < list[maxIndex]:
+                    maxIndex = j
+
+            # Move the smallest element to the sorted list.
+            list[maxIndex], list[i] =  list[i], list[maxIndex]
+        return list
 
 if __name__ == "__main__":
     main()
