@@ -13,6 +13,12 @@ def main():
     print sortedList
 
 class HeapSort(object):
+    '''
+    Heapsort is a selection based sort. A heap is generated and the root is iteratively removed to the sorted array output.
+    The heap is continually rebuilt after each removal to reform smaller heaps.
+    Because a heap is created and items are moved around, this sort is not stable. It sorts in-place.
+    '''
+
     def sort(self, list):
         self.buildHeap(list)
         end = len(list)
@@ -25,16 +31,25 @@ class HeapSort(object):
         return list 
 
     def buildHeap(self, list):
+        '''Builds a heap by adding elements to the root and then applying siftDown.
+        ''' 
+        # Start building heap with the first non-leaf nodes.
         start = (len(list) - 1) / 2
 
+        # Move up the heap, continually enforcing the heap property.
         while start >= 0:
             self.siftDown(list, start, len(list))
             start -= 1
 
     def siftDown(self, list, start, end):
+        '''Apply heap property to tree.
+        '''
         root = start
         leftChild = root * 2 + 1
         rightChild = leftChild + 1
+
+        # Find the largest node. If it is one of the children, swap the nodes and then recurse into
+        # that branch to ensure the heap property. If no swap is needed, no heap property has been changed, so we can return (minor optimization).
         while leftChild < end:
             swap = root
             if list[swap] < list[leftChild]:
