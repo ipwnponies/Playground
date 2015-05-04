@@ -127,4 +127,4 @@ def runSingleTestcase():
     unittest.TextTestRunner().run(tests)
 
 if __name__ == '__main__':
-    runSingleTestcase()
+    runAll()
