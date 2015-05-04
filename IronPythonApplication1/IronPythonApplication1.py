@@ -115,8 +115,13 @@ class MergeSort(object):
         return sortedList
 
 class BubbleSort(object):
+    '''
+    Bubble sort is a comparison sort. Each pass moves elements until the largest element is pushed to the end.
+    A consequence of this is a common optimization to check only n-i elements after each pass.
+    '''
     def sort(self, list):
         for i in xrange(len(list) - 1):
+            # Only need to check the remaining items, the previous i elements have be sorted to the end.
             for j in xrange(len(list) - 1 - i):
                 if list[j] > list[j + 1]:
                     list[j], list[j+1] = list[j+1], list[j]
