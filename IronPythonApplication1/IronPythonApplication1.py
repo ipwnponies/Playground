@@ -117,7 +117,7 @@ class MergeSort(object):
 class BubbleSort(object):
     '''
     Bubble sort is a comparison sort. Each pass moves elements until the largest element is pushed to the end.
-    A consequence of this is a common optimization to check only n-i elements after each pass.
+    A consequence of this is an optimization to check only n-i elements after each pass.
     '''
     def sort(self, list):
         for i in xrange(len(list) - 1):
@@ -128,13 +128,23 @@ class BubbleSort(object):
         return list
 
 class InsertionSort(object):
+    '''
+    Insertion sort is a insertion sort. Each element is inserted to the sorted list in the right location.
+    An optimization is to only check the remaining unsorted list.
+    '''
     def sort(self, list):
-        for i in xrange(len(list)):
-            maxIndex = i
-            for j in xrange(i, len(list)):
-                if list[j] < list[maxIndex]:
-                    maxIndex = j
-            list[maxIndex], list[i] =  list[i], list[maxIndex]
+        # First element is considered trivially sorted with itself.
+        sortedIndex = 0
+
+        # For each element in unsorted list, insert it into sorted order in sorted array.
+        for i in xrange(sortedIndex, len(list)):
+            # Find where element should be inserted in sorted array.
+            for k in xrange(0, sortedIndex):
+                if list[i] < list[k]:
+                    list.insert(k, list.pop(i))
+                    break
+            sortedIndex += 1
+
         return list
 
 class SelectionSort(object):
