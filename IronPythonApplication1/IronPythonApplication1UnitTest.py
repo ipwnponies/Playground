@@ -99,6 +99,11 @@ class MergeSortUnitTest(SortUnitTest, unittest.TestCase):
         SortUnitTest.setUp(self)
         self.sorter = MergeSort()
 
+class QuickSortUnitTest(SortUnitTest, unittest.TestCase):
+    def setUp(self):
+        SortUnitTest.setUp(self)
+        self.sorter = QuickSort()
+
 class BubbleSortUnitTest(SortUnitTest, unittest.TestCase):
     def setUp(self):
         SortUnitTest.setUp(self)
