@@ -3,11 +3,11 @@ from System.Collections.Generic import List
 import clr
 import sys
 
-from random import shuffle
+import random
 
 def main():
     list = [i for i in range(10)]
-    shuffle(list)
+    random.shuffle(list)
 
     sorter = HeapSort()
     sortedList = sorter.sort(list)
@@ -114,6 +114,44 @@ class MergeSort(object):
         sortedList.extend(lista)
         sortedList.extend(listb)
         return sortedList
+
+class QuickSort(object):
+    '''
+    Quicksort is an exchange sorting algorithm. It works by selecting an element as the pivot, then partitioning
+    items into a list of smaller elements and a list of larger elements. The partitions are recursively quicksorted.
+    After the lists are sorted, the two lists and pivot are combined (in order) and result in a the whole sorted list.
+    '''
+
+    def sort(self, list):
+        if len(list) <= 1:
+            # Trivial case, sorted by definition.
+            return list
+        else:
+            # Randomly select pivot.
+            pivot = random.randint(0, len(list) - 1)
+            count = len(list) - 1
+
+            # Temporarily store the pivot value at the end of the list.
+            list[pivot], list[count] = list[count], list[pivot]
+
+            # Initialize the final pivot index.
+            pivot = 0
+
+            for i in xrange(len(list)):
+                # For each item in the list, if it is less than the pivot value, insert it before the pivot index.
+                if list[i] < list[count]:
+                    list[i], list[pivot] = list[pivot], list[i]
+                    pivot += 1
+
+            # Swap the pivot back to its final location.
+            list[pivot], list[count] = list [count], list[pivot]
+
+            # Sort the partitions recursively.
+            firstPartition = self.sort(list[:pivot])
+            secondPartition = self.sort(list[pivot:])
+
+            firstPartition.extend(secondPartition)
+            return firstPartition
 
 class BubbleSort(object):
     '''
