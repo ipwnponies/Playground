@@ -66,18 +66,28 @@ class HeapSort(object):
             rightChild = leftChild + 1
 
 class MergeSort(object):
+    '''
+    Merge sort is a comparison sort. It is stable and is done in-place. A common optimization is to start with bottom up approach,
+    replacing the recursion aspect with an iteration.
+    '''
     def sort(self, list):
         return self.topDownSort(list)
 
     def bottomUpSort(self, list):
         '''Sort with bottom up approach. Each element is sorted within itself. Then merge with its neighbours.
         '''
+
+        # width is the amonunt of elements in a list. Starting with the trivially sorted 1 element list, we increase this until the width is the entire list.
         width = 1
         while width < len(list):
             i = 0
+
+            # Merge adjacent lists together.
             while i < len(list):
                 list[i:i+2*width] = self.merge(list[i:i + width], list[i + width: i + 2*width])
                 i += 2 * width 
+
+            # Move up to the next level as all adjacent lists have now been merged into larger lists.
             width *= 2
         return list
 
